@@ -49,9 +49,10 @@ class NetflexSpider(CrawlSpider):
         if (not page_title) or (not data) or (not isinstance(data, list)) or (len(data) == 0):
             return
 
-        # preprocessing title        
+        # title processing      
         page_title = page_title.replace(' ', '_').replace('|', '') \
-            .replace('/', '_').replace('//', '_').replace('\\', '_').strip()
+            .replace('/', '_').replace('//', '_').replace('\\', '_')\
+            .replace('\\\\', '').replace('?', '').strip()
 
         print(f"Downloading {page_title}:\n{reponse.url}")
 

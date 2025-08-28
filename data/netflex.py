@@ -33,7 +33,7 @@ class NetflexSpider(CrawlSpider):
     }
 
     rules = (
-        Rule(LinkExtractor(), callback='parse_item', follow=True)
+        Rule(LinkExtractor(), callback='parse_item', follow=True),
     )
 
     # to parse html content
@@ -50,11 +50,12 @@ class NetflexSpider(CrawlSpider):
             return
 
         # preprocessing title        
-        page_title = page_title.replace(' ', '_').replace('/', '_').replace('//', '_').strip()
+        page_title = page_title.replace(' ', '_').replace('|', '') \
+            .replace('/', '_').replace('//', '_').replace('\\', '_').strip()
 
         print(f"Downloading {page_title}:\n{reponse.url}")
 
-        file_name = 'netflex_data/' + page_title + '.html'
+        file_name = 'netflex_data//' + page_title + '.html'
 
         with open(file_name, 'w', encoding='utf-8') as f:
             f.write('\n'.join(data))

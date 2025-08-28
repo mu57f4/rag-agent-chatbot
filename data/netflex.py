@@ -10,6 +10,27 @@ class NetflexSpider(CrawlSpider):
     allowd_domains = ["help.netflix.com"]
     max_pages = 100
     counter = 0
+    
+    custom_settings = {
+        'CONCURRENT_REQUESTS': 5,
+        'CONCURRENT_REQUESTS_PER_DOMAIN': 10,
+        'ROBOTSTXT_OBEY': False,
+        'CONCURRENT_ITEMS': 100,
+        'REACTOR_THREADPOOL_MAXSIZE': 400,
+        'LOG_LEVEL': 'INFO',
+        'RETRY_ENABLED': False,
+        'REDIRECT_MAX_TIMES': 1,
+
+        # do not fetch more than 5mb contents
+        'DOWNLOAD_MAXSIZE': 5592405,
+
+        # Grabs xpath before site finish loading
+        'DOWNLOAD_FAIL_ON_DATALOSS': False,
+
+        'DEPTH_PRIORITY': 1,
+        'SCHEDULER_DISK_QUEUE' : 'scrapy.squeues.PickleFifoDiskQueue',
+        'SCHEDULER_MEMORY_QUEUE' :'scrapy.squeues.FifoMemoryQueue'
+    }
 
     rules = (
         Rule(LinkExtractor(), callback='parse_item', follow=True)

@@ -26,6 +26,8 @@ class Agents:
             ]),
             allow_delegation=False,
             llm=self.chat_llm,
+            max_iter=5,
+            max_execution_time=30,
             verbose=False
         )
     

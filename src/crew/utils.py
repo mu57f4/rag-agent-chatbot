@@ -41,11 +41,11 @@ def remember_message(role: str, content: str, user_id: str):
         metadatas=[{"role": role, "user_id": user_id},]
     )
 
-def recall_memory(user_id: str, last_n: int = 5):
+def recall_messages(last_n: int = 5):
     """Retrieve last_n past messages"""
     chat_history = []
     
-    results = memory_collection.get(include=["documents", "metadatas"], where={"user_id": user_id})
+    results = memory_collection.get(include=["documents", "metadatas"])
     docs = results["documents"]
     roles = results["metadatas"]
     

@@ -1,4 +1,7 @@
 Scrapy==2.13.3
+pydantic==2.11.7
 langchain==0.3.27
 beautifulsoup4==4.13.5
 chromadb==1.0.20
+crewai==0.175.0
+agentops==0.4.21

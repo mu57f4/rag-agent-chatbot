@@ -7,7 +7,6 @@ class Settings(BaseSettings):
     CHROMA_DATABASE: str
     GROQ_API_KEY: str
     AGENTOPS_API_KEY: str
-    OPENAI_API_KEY: str
 
     class Config:
         env_file = ".env"

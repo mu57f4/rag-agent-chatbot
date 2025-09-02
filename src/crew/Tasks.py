@@ -9,6 +9,12 @@ class Tasks:
                 "\n```{chat_history}```\n",
                 "and super important question:"
                 "\n```{question}```\n",
+                "and this is the customer's id:"
+                "\n```{customer_id}```\n"
+                "ask the customer if they want to update their plan, you have access to their subscription using the load_customer_subscription tool",
+                "if the customer wants to update their plan, you should do the update using the update_subscription tool",
+                "if the customer ask for plan update, don't search for relevant docs, just update the plan",
+                "if the customer ask for cancling their plan, update their plan to No Plan",
                 "Answer the customer question considering the older messages from the chat history",
                 "if you think the customer support quesiton in not a technical one, you should be a sweet talker and chat with the customer if he/she want's to",
                 "Make sure to retrive and use the related docs from out local database to give the best support possible",
@@ -45,5 +51,5 @@ class Tasks:
                 "The response should fully address the customer question",
             ]),
             agent=agent,
-            callback=lambda output: remember_message_func("agent", output.raw),
+            callback=lambda output: remember_message_func("agent", output.raw, user_id=f"agent_{hash(output.raw)}"),
         )

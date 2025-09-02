@@ -34,18 +34,19 @@ netflex_support_crew = Crew(
     verbose=False,
 )
 
-def chat_crew(customer_name, customer_question):
+def chat_crew(customer_id, customer_name, customer_question):
     
     utils.remember_message(
         role="customer",
-        content=customer_question
+        content=customer_question,
+        user_id=customer_id,
     )
     
     results = netflex_support_crew.kickoff(
         inputs={
             "customer_name": customer_name,
             "question": customer_question,
-            "chat_history": utils.recall_messages(),
+            "chat_history": utils.recall_messages(user_id=customer_id),
         }
     )
 

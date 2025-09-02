@@ -33,19 +33,19 @@ def reset_memory():
     memory_collection.delete(where={'role': 'customer'})
     memory_collection.delete(where={'role': 'agent'})
 
-def remember_message(role: str, content: str):
+def remember_message(role: str, content: str, user_id: str):
     """Store a message in memory"""
     memory_collection.add(
         ids=[f"{role}_{hash(content)}"],
         documents=[content],
-        metadatas=[{"role": role}]
+        metadatas=[{"role": role, "user_id": user_id},]
     )
 
-def recall_messages(last_n: int = 5):
+def recall_memory(user_id: str, last_n: int = 5):
     """Retrieve last_n past messages"""
     chat_history = []
     
-    results = memory_collection.get(include=["documents", "metadatas"])
+    results = memory_collection.get(include=["documents", "metadatas"], where={"user_id": user_id})
     docs = results["documents"]
     roles = results["metadatas"]
     

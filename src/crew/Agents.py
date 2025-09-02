@@ -4,13 +4,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+os.environ["GEMINI_API_KEY"] = os.getenv("GEMINI_API_KEY")
 
 class Agents:
 
     def __init__(self):
         self.chat_llm = LLM(
-            model="groq/meta-llama/llama-4-scout-17b-16e-instruct",
+            model="gemini/gemini-2.5-flash",
             temperature=0.0,
         )
                 
@@ -46,4 +46,4 @@ class Agents:
             allow_delegation=False,
             llm=self.chat_llm,
             verbose=False,
-)
+    )

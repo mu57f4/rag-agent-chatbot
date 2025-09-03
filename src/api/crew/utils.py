@@ -87,7 +87,7 @@ def get_subscription(customer_id: str):
     result = subscription_collection.get(where={"user_id": customer_id})
     if result["metadatas"]:
         return result["metadatas"][0]["subscription_plan"]
-    return None
+    return "Customer not found in the database"
 
 def reset_memory():
     chat_collection.delete(where={'role': 'customer'})

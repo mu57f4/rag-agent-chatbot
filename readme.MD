@@ -37,7 +37,7 @@ An AI-powered customer support system that leverages RAG (Retrieval-Augmented Ge
 
 ## Technology Stack
 - **Frontend**: Streamlit
-- **Backend**: Fast API, CrewAI
+- **Backend**: Fast API, Lightning AI
 - **Database**: ChromaDB (Vector Database)
 - **AI Models**: Google Gemini-2.5-flash
 

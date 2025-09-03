@@ -10,7 +10,7 @@ base_url = "https://5000-dep-01k48m6hx3884cgeadd332nja4-d.cloudspaces.litng.ai/a
 s = requests.Session()
 s.headers.update({"Authorization": f"Bearer {os.getenv('LIGHTNING_USER_API_KEY')}"})
 
-st.title("Netflex Customer Support Chatbot")
+st.title("Netflix Customer Support Chatbot")
 st.text("The backend might be taking a power nap 💤 … give it a few seconds to wake up")
 
 # Sidebar

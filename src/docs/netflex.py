@@ -2,9 +2,9 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from scrapy.exceptions import CloseSpider
 
-class NetflexSpider(CrawlSpider):
+class NetflixSpider(CrawlSpider):
 
-    name = "netflex"
+    name = "netflix"
     base_url = "https://help.netflix.com/en"
     start_urls = ["https://help.netflix.com/en"]
     allowd_domains = ["help.netflix.com"]
@@ -56,7 +56,7 @@ class NetflexSpider(CrawlSpider):
 
         print(f"Downloading {page_title}:\n{reponse.url}")
 
-        file_name = 'netflex_data//' + page_title + '.html'
+        file_name = 'netflix_data//' + page_title + '.html'
 
         with open(file_name, 'w', encoding='utf-8') as f:
             f.write('\n'.join(data))

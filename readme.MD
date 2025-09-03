@@ -1,6 +1,6 @@
-# Netflex Customer Support AI Agent
+# Netflix Customer Support AI Agent
 
-AI-powered customer support system that leverages RAG (Retrieval-Augmented Generation), CrewAI, and multiple LLM agents to provide intelligent, context-aware customer support for a Netflix-like streaming service.
+An AI-powered customer support system that leverages RAG (Retrieval-Augmented Generation), CrewAI, and multiple LLM agents to provide intelligent, context-aware customer support for a Netflix-like streaming service.
 
 
 ## Stack Overview

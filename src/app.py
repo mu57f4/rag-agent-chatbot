@@ -1,9 +1,17 @@
 import requests
 import streamlit as st
 import time
-import src.api.crew.utils as utils
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+# setup api session
+base_url = "https://5000-dep-01k48m6hx3884cgeadd332nja4-d.cloudspaces.litng.ai/api/v1"
+s = requests.Session()
+s.headers.update({"Authorization": f"Bearer {os.getenv('LIGHTNING_USER_API_KEY')}"})
 
 st.title("Netflex Customer Support Chatbot")
+st.text("The backend might be taking a power nap 💤 … give it a few seconds to wake up")
 
 # Sidebar
 st.sidebar.header("Customer Info")
@@ -23,17 +31,21 @@ with st.sidebar.form("customer_form", clear_on_submit=False):
             "username": username,
             "subscription_plan": subscription_plan,
         }
-        utils.add_or_update_subscription(
-            customer_id=username,
-            subscription_plan=subscription_plan
-        )
+
+        s.post(f"{base_url}/account/update-plan", json={
+            "customer_id": username,
+            "subscription_plan": subscription_plan
+        })
         st.sidebar.success("Data saved!")
 
 if st.sidebar.button("🔄 Refresh"):
     st.rerun()
 
 if st.session_state.customer:
-    st.sidebar.warning(f"Your current subscription plan is: {utils.get_subscription(st.session_state.customer.get('username'))}")
+    response = s.get(f"{base_url}/account/get-plan", params={
+        "customer_id": st.session_state.customer.get("username")
+    })
+    st.sidebar.warning(f"Your current subscription plan is: {response.json().get('message')}")
 
 # Main Chat
 if "chat_history" not in st.session_state:
@@ -69,9 +81,8 @@ else:
         }
         
         try:
-            response = requests.post("http://localhost:5000/api/v1/crew/chat", json=chat_request)
-            response.raise_for_status()
-            support_reply = response.json().get("response", "Sorry, I didn't get that. may be its a problem in the backend, please try again.")
+            response = s.post(f"{base_url}/crew/chat", json=chat_request)
+            support_reply = response.json().get("response")
 
         except Exception as e:
             support_reply = "Sorry, there was an error in the backend. Please try again."

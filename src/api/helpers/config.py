@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     CHROMA_TENANT: str
     CHROMA_DATABASE: str
     GEMINI_API_KEY: str
+    LIGHTNING_USER_API_KEY: str
     APP_NAME: str
     APP_VERSION: str
 

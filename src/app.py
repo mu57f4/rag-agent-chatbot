@@ -1,7 +1,7 @@
+import requests
 import streamlit as st
-from src.crew import chat_crew
 import time
-import src.crew.utils as utils
+import src.api.crew.utils as utils
 
 st.title("Netflex Customer Support Chatbot")
 
@@ -61,18 +61,17 @@ else:
         st.session_state.chat_history.append(("user", user_input))
         with st.chat_message("user"):
             st.markdown(user_input)
+
+        chat_request = {
+            "customer_id": st.session_state.customer.get('username'),
+            "customer_name": st.session_state.customer.get('name'),
+            "customer_question": user_input
+        }
         
-        # print(type(st.session_state.chat_history))
-
-        chat_history = convert_chat_history(st.session_state.chat_history)
-        current_subscription_plan = utils.get_subscription(st.session_state.customer.get('username'))
-
         try:
-            support_reply = chat_crew(
-                customer_name=st.session_state.customer.get('name'),
-                customer_id=st.session_state.customer.get('username'),
-                customer_question=user_input,
-            )
+            response = requests.post("http://localhost:5000/api/v1/crew/chat", json=chat_request)
+            response.raise_for_status()
+            support_reply = response.json().get("response", "Sorry, I didn't get that. may be its a problem in the backend, please try again.")
 
         except Exception as e:
             support_reply = "Sorry, there was an error in the backend. Please try again."

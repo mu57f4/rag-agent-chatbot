@@ -6,3 +6,6 @@ chromadb==1.0.20
 crewai==0.175.0
 agentops==0.4.21
 streamlit==1.49.1
+fastapi==0.116.1
+pydantic-settings==2.8.1
+python-multipart==0.0.20

@@ -1,6 +1,6 @@
-# Netflex Customer Support AI Agent
+# Netflix Customer Support AI Agent
 
-AI-powered customer support system that leverages RAG (Retrieval-Augmented Generation), CrewAI, and multiple LLM agents to provide intelligent, context-aware customer support for a Netflix-like streaming service.
+An AI-powered customer support system that leverages RAG (Retrieval-Augmented Generation), CrewAI, and multiple LLM agents to provide intelligent, context-aware customer support for a Netflix-like streaming service.
 
 
 ## Stack Overview
@@ -9,7 +9,8 @@ AI-powered customer support system that leverages RAG (Retrieval-Augmented Gener
 - **ChromaDB**: for vector storage and efficient document retrieval
 - **CrewAI**: for orchestrating AI agents
 - **Gemini-2.5-flash**: brain & response generator for the agents
-- **Streamlit**: the interactive web interface and real-time chat
+- **Fast API**: as a backend to access and chat with crew from an endpoint.
+- **Streamlit**: the interactive web interface for real-time chat
 
 ## Architecture Components
 - **Web Spider**: Developed `CrawlSpider` to collect web pages and extract releated docs. 
@@ -36,7 +37,7 @@ AI-powered customer support system that leverages RAG (Retrieval-Augmented Gener
 
 ## Technology Stack
 - **Frontend**: Streamlit
-- **Backend**: Python, CrewAI
+- **Backend**: Fast API, CrewAI
 - **Database**: ChromaDB (Vector Database)
 - **AI Models**: Google Gemini-2.5-flash
 
@@ -45,7 +46,7 @@ AI-powered customer support system that leverages RAG (Retrieval-Augmented Gener
 1. **Clone the repository**
    ```bash
    git clone https://github.com/yourusername/rag-agent-chatbot.git
-   cd rag-agent-chatbot
+   cd rag-agent-chatbot/src
    ```
 
 2. **Set up environment**
@@ -71,7 +72,9 @@ AI-powered customer support system that leverages RAG (Retrieval-Augmented Gener
     Run the `src\docs\data_processing.ipynb` file to initialize the knowledge base.
 
 6. **Run the application**
+   First command to run the backend api localy, Second one for streamlit UI.
    ```bash
+   python api/main.py
    streamlit run app.py
    ```
 
@@ -94,23 +97,43 @@ AI-powered customer support system that leverages RAG (Retrieval-Augmented Gener
 ## Project folders
 
 ```
-rag-agent-chatbot/
-├── app.py                 # Main Streamlit application
-├── src/
-│   ├── crew/             # Agent and task definitions
-│   │   ├── Agents.py     # AI agent configurations
-│   │   ├── Tasks.py      # Task definitions
-│   │   ├── chatbot.py    # Core chatbot logic
-│   │   └── utils.py      # Utility functions
-│   ├── docs/             # Docs data
-│   │   ├── chroma_db/    # Vector database for docs
-│   │   └── netflex_data/ # Knowledge base 
-│   └── memory_db/        # Chat history storage
-|
-├── requirements.txt      # Project dependencies
-└── .env                  # Env variables 
+└── 📁src
+    └── 📁api
+        └── 📁crew
+            ├── __init__.py
+            ├── .gitignore
+            ├── agentops.log
+            ├── Agents.py
+            ├── chatbot.py
+            ├── Tasks.py
+            ├── utils.py
+        └── 📁helpers
+            ├── config.py
+        └── 📁routes
+            ├── __init__.py
+            ├── base_router.py
+            ├── chat_router.py
+        ├── main.py
+    └── 📁docs
+        └── 📁chroma_db
+            ├── chroma.sqlite3
+        ├── 📁netflex_data
+        ├── .gitignore
+        ├── chroma_upload.py
+        ├── data_processing.ipynb
+        ├── netflex.py
+    └── 📁memory_db
+        ├── chroma.sqlite3
+    ├── __init__.py
+    ├── .env
+    ├── .env.example
+    ├── .gitignore
+    ├── agentops.log
+    ├── app.py
+    ├── requirements.txt
+    └── start.ipynb
 ```
 
 ## Future Updates:
 - Monitor the system using AgentOps.
-- Adding more tools to scale up the automation for customer services.
+- Adding more tools to expand automation for other customer services.

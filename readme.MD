@@ -62,9 +62,9 @@ An AI-powered customer support system that leverages RAG (Retrieval-Augmented Ge
    # Edit .env with your API keys
    ```
 
-4. **Run the Netflex Spider**
+4. **Run the Netflix Spider**
     ```bash
-    scrapy runspider src/docs/netflex.py
+    scrapy runspider src/docs/netflix.py
     ```
 
 5. **Initialize the knowledge base**
@@ -117,11 +117,11 @@ An AI-powered customer support system that leverages RAG (Retrieval-Augmented Ge
     └── 📁docs
         └── 📁chroma_db
             ├── chroma.sqlite3
-        ├── 📁netflex_data
+        ├── 📁netflix_data
         ├── .gitignore
         ├── chroma_upload.py
         ├── data_processing.ipynb
-        ├── netflex.py
+        ├── netflix.py
     └── 📁memory_db
         ├── chroma.sqlite3
     ├── __init__.py

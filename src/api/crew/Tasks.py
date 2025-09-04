@@ -45,16 +45,17 @@ class Tasks:
     def resolution_quality(self, agent: Agent, remember_message_func: any) -> Task:
         return Task(
             description="\n".join([
-                "Review the reponse from customer support agent for customer {customer_name} question",
-                "Ensure that the customer support agent answered the question",
-                "Ensure that the answer is comprehensive, accurate",
-                "Verify that all parts of the customer question have been addressed",
-                "Ensure that the response leaves no questions unanswered."
-                "the customer support agent should answer the customer non-techincal questions and should not ignore them",
+                "Review the response from the customer support agent for customer {customer_name}'s input.",
+                "If the input is a greeting or small-talk (e.g., 'hi', 'hello', 'thanks'), ensure the agent responds politely and naturally without over-elaboration.",
+                "If the input is a greeting or small-talk and the agent responds politely and naturally without over-elaboration. pass the agent response to the customer without any changes.",
+                "If the input is a question, ensure that the customer support agent answered it accurately, comprehensively, and covered all parts of the question.",
+                "Ensure that the response leaves no relevant questions unanswered.",
+                "The customer support agent should answer customer non-technical questions (like greetings or plan inquiries) politely and should not ignore them.",
             ]),
             expected_output="\n".join([
-                "The response should be JUST the final customer answer without any thoughts"
-                "The response should fully address the customer question",
+                "The response should be JUST the final customer-facing answer, without internal thoughts or reasoning.",
+                "For greetings or small-talk: a short, polite, natural response is expected.",
+                "For actual questions: the response should fully address the customer query, with accuracy and completeness.",
             ]),
             agent=agent,
             callback=lambda output: remember_message_func("agent", output.raw, user_id=f"agent_{hash(output.raw)}"),

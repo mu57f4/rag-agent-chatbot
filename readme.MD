@@ -113,6 +113,7 @@ An AI-powered customer support system that leverages RAG (Retrieval-Augmented Ge
             ├── __init__.py
             ├── base_router.py
             ├── chat_router.py
+            ├── plan_router.py
         ├── main.py
     └── 📁docs
         └── 📁chroma_db

@@ -2,6 +2,9 @@
 
 An AI-powered customer support system that leverages RAG (Retrieval-Augmented Generation), CrewAI, and multiple LLM agents to provide intelligent, context-aware customer support for a Netflix-like streaming service.
 
+## Demo
+
+You can find the deployed streamlit app [here](https://netflix-customer-support.streamlit.app/)
 
 ## Stack Overview
 
